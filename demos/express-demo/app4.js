@@ -1,31 +1,52 @@
-var express    = require('express');
-var app        = express();
+var express = require('express');
+var app = express();
 var bodyParser = require('body-parser');
-var moment     = require('moment');
+var moment = require('moment');
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 var port = process.env.PORT || 8080;
 var router = express.Router();
 
-router.use(function(req, res, next) {
+router.use(function (req, res, next) {
   // console.log('There is a requesting.');
   console.log('There is a requesting at ' + moment().format('YYYY-MM-DD HH:mm:ss'));
   next();
 });
 
-router.get('/', function(req, res) {
+// router.get('/', function (req, res) {
+//   res.send('<h1>Hello World</h1>');
+// });
+
+router.get('/', function (req, res) {
+  var name = req.query.name;
+  if (name) {
+    res.json({message: 'Hi~ ' + name});
+  }
   res.send('<h1>Hello World</h1>');
 });
 
-router.get('/:name', function(req, res) {
+router.get('/:name', function (req, res) {
   res.send('<h1>Hello ' + req.params.name + '</h1>');
 });
 
+// router.post('/', function (req, res) {
+//   var name = req.body.name;
+//   res.json({message: 'Hello ' + name});
+// });
+
 router.post('/', function (req, res) {
-  var name = req.body.name;
-  res.json({message: 'Hello ' + name});
+  var name = req.query.name;
+  if (name) {
+    res.json({message: 'Hi ' + name});
+  }
+  name = req.body.name;
+  if (name) {
+    res.json({message: 'Hello ' + name});
+  }
+  res.json({message: 'Hello Nothing'});
 });
+
 
 app.use('/home', router);
 
