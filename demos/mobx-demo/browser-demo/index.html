@@ -13,23 +13,23 @@
 <script src="./mobx.umd.js"></script>
 <script src="./mobx-react.js"></script>
 <script type="text/babel">
-const {observable, computed} = mobx;
-const {observer} = mobxReact;
-const {Component} = React;
-const {render}  = ReactDOM
+  const {observable, computed} = mobx;
+  const {observer} = mobxReact;
+  const {Component} = React;
+  const {render}  = ReactDOM
 
-const person = observable({
-  name: "张三",
-  age: 31
-});
+  const person = observable({
+    name: "张三",
+    age: 31
+  });
 
-const App = observer(
-  ({ person }) => <h1>{ person.name }</h1>
-);
+  const App = observer(
+    ({person}) => <h1>{ person.name }</h1>
+  );
 
-render(<App person={person} />, document.getElementById('app'));
+  render(<App person={person}/>, document.getElementById('app'));
 
-person.name = "李四";
+  person.name = "李四";
 </script>
 </body>
 </html>

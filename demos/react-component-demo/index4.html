@@ -13,13 +13,17 @@
     constructor(...args) {
       super(...args);
       this.state = {
-        text: 'World'
+        text: 'World',
+        isClicked: false
       };
     }
 
     handleClick() {
+      var d = new Date();
+      let isClicked = !this.state.isClicked;
       this.setState({
-        text: 'Clicked'
+        isClicked: isClicked,
+        text: isClicked? d.getFullYear() : "World"
       });
     }
 
